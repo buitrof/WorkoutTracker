@@ -1,21 +1,13 @@
-const mongoose = require('mongoose')
 const express = require('express')
-
+const path = require('path')
 const app = express()
 
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(require('./routes'))
 
-app.get('/', (req, res) => {
-  res.render('./public', {
-  })
-})
-
-mongoose.connect('mongodb://localhost/workoutdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+require('./config')
   .then(() => app.listen(3000))
   .catch(e => console.error(e))

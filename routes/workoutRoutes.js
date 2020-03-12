@@ -7,4 +7,10 @@ router.get('/workouts', (req, res) => {
   .catch(e => console.error(e))
 })
 
+router.post('/workouts', (req, res) => {
+  Workout.create(req.body)
+    .then(() => res.sendStatus(200))
+    .catch(e => console.error(e))
+})
+
 module.exports=router
